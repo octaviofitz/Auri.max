@@ -15,7 +15,7 @@ const CategoryData = [
         id: 3,
         name: "noisecancelling",
         description: "Noise Cancelling",
-        img: "/mockup/Categories/NoiseCancelling.png"
+        img: "/mockup/Categories/noiseCancelling.png"
     }
   ];
   
