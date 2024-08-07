@@ -23,7 +23,7 @@ const Data = [
       price: 69999,
       category: "onear",
       model: "JBL",
-      description: "Auriculares supraaurales con cable",
+      description: "Auriculares supraaurales con cable para mayor comodidad",
       img: "/mockup/tune500.png"
     },
   

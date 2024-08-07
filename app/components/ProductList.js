@@ -7,7 +7,7 @@ function ProductList({ data }) {
       {data.map((product, index) => (
         <div key={index} className="w-full sm:w-1/2 lg:w-1/3 p-2 box-border">
           <ProductCard
-            id={product.id}  // Pasamos el id del producto
+            id={product.id} 
             img={product.img}
             name={product.name}
             price={product.price}

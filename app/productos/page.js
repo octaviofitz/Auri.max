@@ -4,7 +4,7 @@ import CategoriasList from '../components/CategoriasList.js';
 
 function page() {
     return (
-        <div>
+        <div className='p-300px'>
             <CategoriasList data={DataCategory} />
         </div>
     );
