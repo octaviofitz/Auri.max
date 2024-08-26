@@ -1,13 +1,31 @@
-import React from 'react';
-import DataCategory from '../../data/CategoryData.js';
+'use client';
+import React, { useEffect, useState } from 'react';
+import { collection, getDocs } from 'firebase/firestore'; 
+import { db } from '../config/firebase'; // Importa db desde tu archivo firebase.js
 import CategoriasList from '../components/CategoriasList.js';
 
-function page() {
+function Page() {
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const categoryCollection = collection(db, 'categorys');
+            const categorySnapshot = await getDocs(categoryCollection);
+            const categoryList = categorySnapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+            setCategories(categoryList);
+        };
+
+        fetchData();
+    }, []);
+
     return (
         <div className='p-300px'>
-            <CategoriasList data={DataCategory} />
+            <CategoriasList data={categories} />
         </div>
     );
 }
 
-export default page;
+export default Page;

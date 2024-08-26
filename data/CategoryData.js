@@ -1,4 +1,4 @@
-const CategoryData = [
+/* const CategoryData = [
     {
       id: 1,
       name: "onear",
@@ -20,4 +20,4 @@ const CategoryData = [
   ];
   
   export default CategoryData;
-  
+   */

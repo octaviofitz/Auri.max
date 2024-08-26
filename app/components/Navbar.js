@@ -1,10 +1,18 @@
+// components/Navbar.js
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { MenuIcon, ShoppingCartIcon } from '@heroicons/react/outline';
+import ModalCart from '../components/ModalCart';  // Verifica la ruta
 
 export default function Navbar() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -24,7 +32,7 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center md:hidden">
-          <ShoppingCartIcon className="w-6 h-6 text-gray-500 dark:text-gray-400 mr-4" />
+          <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400 mr-4" />
           <button
             onClick={toggleNavbar}
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -81,11 +89,14 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="ml-auto hidden md:block">
-              <ShoppingCartIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+              <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400" />
             </li>
           </ul>
         </div>
       </div>
+
+      {/* Modal */}
+      <ModalCart isOpen={isModalOpen} toggleModal={toggleModal} />
     </nav>
   );
 }

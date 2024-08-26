@@ -1,16 +1,42 @@
+'use client'
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import Data from '../../../data/Data';
+import { useParams } from 'next/navigation';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '@/app/config/firebase';
+import { useCartContext } from '@/app/context/CartContext'; // Asegúrate de usar 'useCartContext'
 
-export async function generateStaticParams() {
-  const paths = Data.map((product) => ({
-    id: product.id.toString(),
-  }));
+const ProductPage = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  return paths;
-}
+  const { addToCart } = useCartContext(); // Asegúrate de usar 'useCartContext'
 
-const ProductPage = ({ params }) => {
-  const product = Data.find((prod) => prod.id.toString() === params.id);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const productRef = doc(db, "products", id);
+        const productSnap = await getDoc(productRef);
+
+        if (productSnap.exists()) {
+          setProduct({ id: productSnap.id, ...productSnap.data() });
+        } else {
+          console.log("No such product!");
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading) {
+    return <div className="text-center mt-8 text-xl">Cargando...</div>;
+  }
 
   if (!product) {
     return <div className="text-center mt-8 text-xl">Producto no encontrado</div>;
@@ -35,9 +61,10 @@ const ProductPage = ({ params }) => {
         </div>
 
         {/* Botones de acción */}
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center -mt-3 mb-4">
           <div className="w-[75vw] md:w-[20vw]">
             <button
+              onClick={() => addToCart(product)}
               type="button"
               className="w-full px-6 py-3.5 text-base text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm mb-3 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             >
@@ -45,15 +72,8 @@ const ProductPage = ({ params }) => {
             </button>
           </div>
           <div className="w-[75vw] md:w-[20vw]">
-            <button
-              type="button"
-              className="w-full px-6 py-3.5 text-base text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm mb-4 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 mb-10"
-            >
-              Comprar ahora
-            </button>
           </div>
         </div>
-
       </div>
     </div>
   );
