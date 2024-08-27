@@ -4,14 +4,13 @@ import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '@/app/config/firebase';
-import { useCartContext } from '@/app/context/CartContext'; // Asegúrate de usar 'useCartContext'
+import { useCartContext } from '@/app/context/CartContext';
 
 const ProductPage = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  const { addToCart } = useCartContext(); // Asegúrate de usar 'useCartContext'
+  const { addToCart } = useCartContext();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -26,20 +25,14 @@ const ProductPage = () => {
         }
       } catch (error) {
         console.error("Error fetching product:", error);
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchProduct();
   }, [id]);
 
-  if (loading) {
-    return <div className="text-center mt-8 text-xl">Cargando...</div>;
-  }
-
   if (!product) {
-    return <div className="text-center mt-8 text-xl">Producto no encontrado</div>;
+    return <div className="text-center mt-8 text-xl"></div>;
   }
 
   return (

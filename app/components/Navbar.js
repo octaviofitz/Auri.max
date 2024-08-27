@@ -89,14 +89,14 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="ml-auto hidden md:block">
-              <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+              <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400 cursor-pointer" />
             </li>
           </ul>
         </div>
       </div>
 
       {/* Modal */}
-      <ModalCart isOpen={isModalOpen} toggleModal={toggleModal} />
+      <ModalCart isOpen={isModalOpen} toggleModal={toggleModal}/>
     </nav>
   );
 }
