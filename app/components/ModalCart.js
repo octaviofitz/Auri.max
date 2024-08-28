@@ -5,9 +5,11 @@ import { useCartContext } from '../context/CartContext';
 import Link from 'next/link';
 
 const ModalCart = ({ isOpen, toggleModal }) => {
-  if (!isOpen) return null;
-
+  // Asegúrate de que useCartContext se llama siempre
   const { cart, removeFromCart } = useCartContext();
+
+  // Si el modal no está abierto, no renderiza el contenido
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
