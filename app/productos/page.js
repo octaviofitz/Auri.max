@@ -22,7 +22,7 @@ function Page() {
     }, []);
 
     return (
-        <div className='p-300px'>
+        <div className='pt-[75px] min-h-screen'>
             <CategoriasList data={categories} />
         </div>
     );

@@ -21,10 +21,10 @@ const ProductPage = () => {
         if (productSnap.exists()) {
           setProduct({ id: productSnap.id, ...productSnap.data() });
         } else {
-          console.log("No such product!");
+          console.log("No se encontró producto!");
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
+        console.error("Error fetch del producto:", error);
       }
     };
 

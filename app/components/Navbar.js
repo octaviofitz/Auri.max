@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { MenuIcon, ShoppingCartIcon } from '@heroicons/react/outline';
 import ModalCart from '../components/ModalCart';  
+import { useCartContext } from '../context/CartContext';  
 
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { cart } = useCartContext();  
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
@@ -22,8 +24,10 @@ export default function Navbar() {
     setIsOpen(false);
   };
 
+  const totalItems = cart.reduce((total, item) => total + item.quantity, 0);  // Calcula la cantidad total de productos
+
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="bg-white border-gray-200 dark:bg-gray-900 relative">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
           <Image src="/navbar.png" alt="Flowbite Logo" width={32} height={32} className="h-8" />
@@ -31,7 +35,14 @@ export default function Navbar() {
         </Link>
 
         <div className="flex items-center md:hidden">
-          <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400 mr-4" />
+          <div className="relative">
+            <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400 mr-2" />
+            {totalItems > 0 && (
+              <span className="absolute top-[-5px] right-[-5px] bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                {totalItems}
+              </span>
+            )}
+          </div>
           <button
             onClick={toggleNavbar}
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -88,13 +99,19 @@ export default function Navbar() {
               </Link>
             </li>
             <li className="ml-auto hidden md:block">
-              <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400 cursor-pointer" />
+              <div className="relative">
+                <ShoppingCartIcon onClick={toggleModal} className="w-6 h-6 text-gray-500 dark:text-gray-400 cursor-pointer" />
+                {totalItems > 0 && (
+                  <span className="absolute top-[-5px] right-[-5px] bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">
+                    {totalItems}
+                  </span>
+                )}
+              </div>
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Modal */}
       <ModalCart isOpen={isModalOpen} toggleModal={toggleModal}/>
     </nav>
   );

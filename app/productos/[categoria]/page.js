@@ -44,7 +44,7 @@ const Page = () => {
             {Array.isArray(products) && products.length > 0 ? (
                 <ProductList data={products} />
             ) : (
-                <div>No products found</div>
+                <div></div>
             )}
         </div>
     );
