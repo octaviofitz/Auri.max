@@ -9,31 +9,32 @@ function Page() {
     return (
         <section className='lg:flex lg:my-16'>
             <article className='mt-4 lg:w-[60vw] lg:ml-[8vw]'>
-                {cart.map(item =>
-                    <div className='flex flex-col bg-white rounded-lg shadow m-4 dark:bg-gray-800 py-4 px-2' key={item.id}>
+                {cart.map((item, index) => (
+                    <div className='flex flex-col bg-white rounded-lg shadow m-4 dark:bg-gray-800 pt-3 pb-6 px-2' key={`${item.id}-${index}`}>
                         <div className='flex justify-around items-center'>
-                            <Image src={item.img} alt='Productos carrito' width={100} height={100} className='xl:w-1/6'/>
+                            <Image src={item.img} alt='Productos carrito' width={100} height={100} className='xl:w-1/6' />
                             <p className='text-sm px-2 lg:text-xl'>{item.name}</p>
                             <p className='text-sm lg:text-xl'>${item.price}</p>
                         </div>
-                        <div className='flex justify-end items-center -mt-10'>
+                        <div className='flex justify-around items-center mt-2'>
+                            <p className='text-sm lg:text-xl'>Cantidad: {item.quantity}</p>
                             <button
                                 type='button'
-                                className='flex items-center text-sm -mt-15 mr-1'
-                                onClick={() => removeFromCart(item.id)} 
+                                className='flex items-center text-sm mr-1 text-red-600'
+                                onClick={() => removeFromCart(item.id)}
                             >
                                 Quitar <Image src='/cancell.png' width={10} height={10} alt='quit' className='ml-2 lg:text-xl lg:mr-20' />
                             </button>
                         </div>
                     </div>
-                )}
+                ))}
             </article>
 
             <aside className='bg-white rounded-lg shadow m-4 dark:bg-gray-800 py-4 xl:h-[225px] xl:mt-[32px]'>
-            <h3 className='px-5'>Resumen de compra</h3>
+                <h3 className='px-5'>Resumen de compra</h3>
                 <div className='flex justify-between px-5 my-2'>
                     <p>Productos</p>
-                    <p>{cart.length}</p> {/* Mostrar la cantidad de productos en el carrito */}
+                    <p>{cart.reduce((total, item) => total + item.quantity, 0)}</p> {/* Mostrar la cantidad total de productos en el carrito */}
                 </div>
 
                 <div className='flex justify-between px-5 my-2'>
@@ -41,9 +42,9 @@ function Page() {
                     <p>Gratis</p>
                 </div>
 
-                <div className='flex justify-between px-5 my-3 mb-5 '>
+                <div className='flex justify-between px-5 my-3 mb-5'>
                     <p className='font-black'>Total</p>
-                    <p className='font-black'>${calculateTotal()}</p> {/* Mostrar el total calculado */}
+                    <p className='font-black'>${calculateTotal()}</p> 
                 </div>
 
                 <div className="flex margin-auto justify-center align-center px-20">
@@ -55,7 +56,6 @@ function Page() {
                     </button>
                 </div>
             </aside>
-
         </section>
     );
 }

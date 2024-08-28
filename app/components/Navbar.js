@@ -1,10 +1,9 @@
-// components/Navbar.js
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { MenuIcon, ShoppingCartIcon } from '@heroicons/react/outline';
-import ModalCart from '../components/ModalCart';  // Verifica la ruta
+import ModalCart from '../components/ModalCart';  
 
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
