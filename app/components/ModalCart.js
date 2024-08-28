@@ -1,4 +1,4 @@
-// components/ModalCart.js
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import { useCartContext } from '../context/CartContext'; 
