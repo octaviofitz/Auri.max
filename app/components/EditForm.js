@@ -1,24 +1,25 @@
 'use client'
-import { useState } from 'react';
-import { doc, setDoc } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
 import Swal from 'sweetalert2';
+import { useRouter } from 'next/navigation';
 
-const createProduct = async (values, file) => {
+const updateProduct = async (id, values, file) => {
     try {
-        // Crear una referencia al archivo en Firebase Storage
-        const storageRef = ref(storage, `products/${values.id}`);
+        let fileURL = values.img; // Mantener la URL de la imagen existente
 
-        // Subir el archivo
-        const fileSnapShot = await uploadBytes(storageRef, file);
+        // Si hay un nuevo archivo, subirlo a Firebase Storage
+        if (file) {
+            const storageRef = ref(storage, `products/${id}`);
+            const fileSnapShot = await uploadBytes(storageRef, file);
+            fileURL = await getDownloadURL(fileSnapShot.ref);
+        }
 
-        // Obtener la URL de descarga del archivo subido
-        const fileURL = await getDownloadURL(fileSnapShot.ref);
-
-        // Guardar los datos del producto en Firestore
-        const docRef = doc(db, "products", values.id);
-        await setDoc(docRef, {
+        // Actualizar los datos del producto en Firestore
+        const docRef = doc(db, "products", id);
+        await updateDoc(docRef, {
             ...values,
             img: fileURL
         });
@@ -26,32 +27,65 @@ const createProduct = async (values, file) => {
         // Mostrar alerta de éxito
         Swal.fire({
             title: '¡Éxito!',
-            text: 'Producto agregado con éxito',
+            text: 'Producto editado con éxito',
             icon: 'success',
             confirmButtonText: 'Aceptar'
         });
 
     } catch (error) {
-        console.error("Error al agregar el producto:", error);
+        console.error("Error al actualizar el producto:", error);
         Swal.fire({
             title: 'Error',
-            text: 'Hubo un problema al agregar el producto',
+            text: 'Hubo un problema al editar el producto',
             icon: 'error',
             confirmButtonText: 'Aceptar'
         });
     }
 };
 
-export default function CreateForm() {
+export default function EditForm({ productId }) {
     const [values, setValues] = useState({
         id: '',
         name: '',
         category: '',
         stock: '',
         price: '',
+        model: '',
+        description: '',
+        img: '',
     });
 
     const [file, setFile] = useState(null);
+    const router = useRouter();
+
+    // Cargar los datos del producto
+    useEffect(() => {
+        const loadProduct = async () => {
+            const docRef = doc(db, "products", productId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const productData = docSnap.data();
+                setValues({
+                    id: productData.id || '', // Evitar undefined, asegurar que sea un string vacío
+                    name: productData.name || '',
+                    category: productData.category || '',
+                    stock: productData.stock || '',
+                    price: productData.price || '',
+                    model: productData.model || '',
+                    description: productData.description || '',
+                    img: productData.img || '',
+                });
+            } else {
+                console.log("No se encontró el producto");
+                router.push('/admin'); // Redirigir si no se encuentra el producto
+            }
+        };
+
+        if (productId) {
+            loadProduct();
+        }
+    }, [productId, router]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -67,18 +101,12 @@ export default function CreateForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (file) {
-            await createProduct(values, file);
-        } else {
-            console.log("No file selected");
-        }
+        await updateProduct(productId, values, file);
     };
 
     return (
         <div className="mx-4">
-        
-
-<form className="max-w-md mx-auto py-10 xl:py-20" onSubmit={handleSubmit}>
+            <form className="max-w-md mx-auto py-10 xl:py-20" onSubmit={handleSubmit}>
       
 
       <div className="grid md:grid-cols-2 md:gap-6">
@@ -105,6 +133,7 @@ export default function CreateForm() {
           <input
             type="number"
             value={values.id}
+            disabled
             name="id"
             onChange={handleChange}
             id="floating_last_name"
@@ -239,13 +268,9 @@ export default function CreateForm() {
         type="submit"
         className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 my-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
       >
-        Crear producto
+        Editar producto
       </button>
     </form>
-
-            
-
-
         </div>
     );
 }
