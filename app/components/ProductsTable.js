@@ -127,7 +127,7 @@ export default function ProductsTable() {
                   </button>
                   <button
                     onClick={() => handleDelete(product.id)}
-                    className="font-medium text-red-600 dark:text-red-500 hover:underline -ml-1"
+                    className="font-medium text-red-600 dark:text-red-500 hover:underline -ml-1 mt-3"
                     disabled={deletingProductId === product.id} // Deshabilita el botón si este producto se está eliminando
                   >
                     {deletingProductId === product.id ? "Eliminando..." : "Eliminar"}

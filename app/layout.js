@@ -18,16 +18,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={inter.className}>
-{/*         <AuthProvider>
- */}        <CartProvider >
+         <AuthProvider>
+         <CartProvider >
         <Navbar />
         <main>
           {children}
         </main>
         <Footer />
         </CartProvider>
-{/*         </AuthProvider>
- */}        </body>
+        </AuthProvider>
+        </body>
     </html>
   );
 }
