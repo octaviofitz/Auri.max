@@ -4,10 +4,11 @@ import { useState } from 'react';
 import { useAuthContext } from '@/app/context/AuthContext';
 
 function LoginForm() {
-    const { registerUser } = useAuthContext();
+    const { registerUser, loginUser, error } = useAuthContext();
     const [values, setValues] = useState({
         email: "",
-        password: ""
+        password: "",
+        isLogin: true
     });
 
     const handleChange = (e) => {
@@ -19,8 +20,11 @@ function LoginForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Llama a registerUser al enviar el formulario
-        await registerUser(values.email, values.password);
+        if (values.isLogin) {
+            await loginUser(values.email, values.password);
+        } else {
+            await registerUser(values.email, values.password);
+        }
     };
 
     return (
@@ -54,18 +58,23 @@ function LoginForm() {
                         onChange={handleChange}
                     />
                 </div>
-                {/* <button
+                {error && (
+                    <div className="mb-5 text-red-500">
+                        {error}
+                    </div>
+                )}
+                <button
                     type="submit"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
-                    Ingresar
-                </button> */}
+                    {values.isLogin ? "Ingresar" : "Registrarme"}
+                </button>
                 <button
                     type="button"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                    onClick={() => registerUser(values.email, values.password)}
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-2"
+                    onClick={() => setValues({ ...values, isLogin: !values.isLogin })}
                 >
-                    Registrarme
+                    {values.isLogin ? "Registrate" : "¿Ya tienes cuenta? Inicia sesión"}
                 </button>
             </form>
         </div>

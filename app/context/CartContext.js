@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 // Crear el contexto del carrito
 export const CartContext = createContext();
@@ -7,10 +7,6 @@ export const CartContext = createContext();
 // Proveedor del contexto del carrito
 export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([]);
-
-    useEffect(() => {
-        console.log({ cart });
-    }, [cart]);
 
     // Añadir un artículo al carrito
     const addToCart = (item) => {
@@ -49,8 +45,13 @@ export const CartProvider = ({ children }) => {
         return cart.reduce((total, item) => total + item.price * item.quantity, 0);
     };
 
+    // Vaciar el carrito
+    const clearCart = () => {
+        setCart([]);
+    };
+
     return (
-        <CartContext.Provider value={{ cart, addToCart, removeFromCart, calculateTotal }}>
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, calculateTotal, clearCart }}>
             {children}
         </CartContext.Provider>
     );

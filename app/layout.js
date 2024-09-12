@@ -7,27 +7,32 @@ import { AuthProvider } from "./context/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
+// Importa Firebase aquí
+import { app } from '../app/config/firebase';
+
+// Agrega este console.log aquí
+console.log('Firebase initialized:', app !== undefined);
+
 export const metadata = {
   title: "AuriMax - Todo en Auriculares",
   description: "Los mejores auriculares del mercado",
-  keywords: ["Auriculares" , "Aurimax", "Venta de Auriculares", "Sony", "JBL"]
+  keywords: ["Auriculares", "Aurimax", "Venta de Auriculares", "Sony", "JBL"]
 };
-
 
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={inter.className}>
          <AuthProvider>
-         <CartProvider >
-        <Navbar />
-        <main>
-          {children}
-        </main>
-        <Footer />
-        </CartProvider>
-        </AuthProvider>
-        </body>
+           <CartProvider >
+             <Navbar />
+             <main>
+               {children}
+             </main>
+             <Footer />
+           </CartProvider>
+         </AuthProvider>
+      </body>
     </html>
   );
 }

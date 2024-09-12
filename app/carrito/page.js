@@ -1,10 +1,35 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useCartContext } from '../context/CartContext';
+import { createPurchaseTicket } from '../lib/getTicket';
+import { useRouter } from 'next/navigation'; // Importa useRouter
 
 function Page() {
-    const { cart, removeFromCart, calculateTotal } = useCartContext();
+    const { cart, removeFromCart, calculateTotal, clearCart } = useCartContext(); // Asegúrate de que clearCart esté definido en tu contexto
+    const [modalVisible, setModalVisible] = useState(false);
+    const [ticketId, setTicketId] = useState('');
+    const router = useRouter(); // Inicializa useRouter
+
+    const handleFinalizePurchase = async () => {
+        try {
+            const total = calculateTotal();
+            const id = await createPurchaseTicket(cart, total);
+            setTicketId(id);
+            setModalVisible(true);
+            // Opcional: Limpiar el carrito después de la compra
+            // clearCart();
+        } catch (error) {
+            console.error("Error finalizing purchase:", error);
+            // Manejar errores aquí si es necesario
+        }
+    };
+
+    const handleCloseModal = () => {
+        clearCart(); // Limpia el carrito
+        setModalVisible(false); // Cierra el modal
+        router.push('/'); // Redirige al índice
+    };
 
     return (
         <section className='lg:flex lg:my-16 min-h-screen'>
@@ -50,15 +75,36 @@ function Page() {
                     <p className='font-black'>${calculateTotal()}</p>
                 </div>
 
-                <div className="flex margin-auto justify-center align-center px-20">
+                <div className="flex justify-center px-20">
                     <button
                         type="button"
                         className="w-full px-6 py-3.5 text-base text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm mb-3 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        onClick={handleFinalizePurchase}
                     >
                         Finalizar compra
                     </button>
                 </div>
             </aside>
+
+            {/* Modal */}
+            {modalVisible && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 w-full">
+                    <div className="bg-white rounded-lg shadow m-4 dark:bg-gray-800 p-5 rounded-lg shadow-lg">
+                        <h2 className="text-lg font-bold mb-2 text-center">COMPRA REALIZADA</h2>
+                        <p className='text-center pt-3'>Su compra ha sido realizada con éxito. Le estaremos enviando un correo con los detalles.</p>
+                        <p className='text-center pt-3'>Su ticket de compra es: <strong>{ticketId}</strong></p>
+                        <div className="flex justify-center mt-4">
+                            <button
+                                type="button"
+                                className="px-4 py-2 bg-blue-500 text-white rounded"
+                                onClick={handleCloseModal} // Llama a handleCloseModal al hacer clic
+                            >
+                                Cerrar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </section>
     );
 }

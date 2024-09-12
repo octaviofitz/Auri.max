@@ -40,7 +40,7 @@ const ModalCart = ({ isOpen, toggleModal }) => {
         </div>
         <div className="p-4 -ml-7">
           {cart.length === 0 ? (
-            <p className="text-white-900 text-center mb-4">Tu carrito está vacío</p>
+            <p className="text-orange-600 text-center mb-4">Tu carrito está vacío</p>
           ) : (
             cart.map((item, index) => (
               <div key={`${item.id}-${index}`} className="flex ml--10 mb-2 justify-around">
