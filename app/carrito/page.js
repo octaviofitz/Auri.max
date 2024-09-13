@@ -35,15 +35,15 @@ function Page() {
         <section className='lg:flex lg:my-16 min-h-screen'>
             <article className='mt-4 lg:w-[60vw] lg:ml-[8vw]'>
                 {cart.map((item, index) => (
-                    <div className='flex bg-white rounded-lg shadow m-4 dark:bg-gray-800 p-4' key={`${item.id}-${index}`}>
+                    <div className='flex bg-white rounded-lg shadow m-4 dark:bg-white-800 p-4' key={`${item.id}-${index}`}>
                         <Image src={item.img} alt='Productos carrito' width={100} height={100} className='xl:w-1/6' />
                         <div className='flex flex-col justify-around flex-grow mt-5'>
-                            <div className='flex justify-around items-center -m-5'>
-                                <p className='text-sm lg:text-lg'>{item.name}</p>
+                            <div className='flex justify-around items-center -m-5 text-teal-900 font-black'>
+                                <p className='text-sm lg:text-lg text-teal-900'>{item.name}</p>
                                 <p className='text-sm lg:text-lg'>${item.price}</p>
                             </div>
-                            <div className='flex justify-around items-center'>
-                                <p className='text-sm lg:text-lg'>Cantidad: {item.quantity}</p>
+                            <div className='flex justify-around items-center font-black'>
+                                <p className='text-sm lg:text-lg text-teal-900 text-black'>Cantidad: {item.quantity}</p>
                                 <button
                                     type='button'
                                     className='flex items-center text-sm text-red-600 ml-10'
@@ -58,7 +58,7 @@ function Page() {
                 ))}
             </article>
 
-            <aside className='bg-white rounded-lg shadow m-4 dark:bg-gray-800 py-4 xl:h-[225px] xl:mt-[32px]'>
+            <aside className='bg-white rounded-lg shadow m-4 dark:bg-white-800 py-4 xl:h-[225px] xl:mt-[32px] text-teal-900'>
                 <h3 className='px-5'>Resumen de compra</h3>
                 <div className='flex justify-between px-5 my-2'>
                     <p>Productos</p>
@@ -78,7 +78,7 @@ function Page() {
                 <div className="flex justify-center px-20">
                     <button
                         type="button"
-                        className="w-full px-6 py-3.5 text-base text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm mb-3 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        className="w-full px-6 py-3.5 text-base text-gray-900 bg-teal-900 border border-gray-300 focus:outline-none hover:bg-teal-900 focus:ring-4 focus:ring-teal-900 font-medium rounded-lg text-sm mb-3 dark:bg-teal-900 dark:text-white dark:border-teal-900 dark:hover:bg-teal-900 dark:hover:border-teal-900 dark:focus:ring-teal-900"
                         onClick={handleFinalizePurchase}
                     >
                         Finalizar compra
@@ -89,14 +89,14 @@ function Page() {
             {/* Modal */}
             {modalVisible && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 w-full">
-                    <div className="bg-white rounded-lg shadow m-4 dark:bg-gray-800 p-5 rounded-lg shadow-lg">
-                        <h2 className="text-lg font-bold mb-2 text-center">COMPRA REALIZADA</h2>
-                        <p className='text-center pt-3'>Su compra ha sido realizada con éxito. Le estaremos enviando un correo con los detalles.</p>
-                        <p className='text-center pt-3'>Su ticket de compra es: <strong>{ticketId}</strong></p>
+                    <div className="bg-white rounded-lg shadow m-4 dark:bg-pink-100 p-5 rounded-lg shadow-lg text-teal-900">
+                        <h2 className="text-lg font-bold mb-2 text-center text-teal-900 text-black">COMPRA REALIZADA</h2>
+                        <p className='text-center pt-3 text-semibold'>Su compra ha sido realizada con éxito. Le estaremos enviando un correo con los detalles.</p>
+                        <p className='text-center pt-3 text-teal-900 text-black'>Su ticket de compra es: <strong>{ticketId}</strong></p>
                         <div className="flex justify-center mt-4">
                             <button
                                 type="button"
-                                className="px-4 py-2 bg-blue-500 text-white rounded"
+                                className="px-4 py-2 bg-teal-900 text-white rounded"
                                 onClick={handleCloseModal} // Llama a handleCloseModal al hacer clic
                             >
                                 Cerrar

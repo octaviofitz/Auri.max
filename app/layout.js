@@ -1,11 +1,15 @@
-import { Inter } from "next/font/google";
+import { Average_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
 import { AuthProvider } from "./context/AuthContext";
 
-const inter = Inter({ subsets: ["latin"] });
+// Especifica el peso de la fuente
+const averageSans = Average_Sans({
+  subsets: ["latin"],
+  weight: "400" // Asegúrate de usar el peso disponible
+});
 
 // Importa Firebase aquí
 import { app } from '../app/config/firebase';
@@ -22,9 +26,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={inter.className}>
+      <body className={`${averageSans.className} bg-teal-900 text-black`}>
          <AuthProvider>
-           <CartProvider >
+           <CartProvider>
              <Navbar />
              <main>
                {children}

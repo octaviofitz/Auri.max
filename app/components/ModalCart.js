@@ -13,12 +13,12 @@ const ModalCart = ({ isOpen, toggleModal }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-full max-w-lg p-6 mx-auto bg-gray-800 rounded-lg shadow-lg">
+      <div className="relative w-full max-w-lg p-6 mx-auto bg-pink-100 rounded-lg shadow-lg">
         <div className="flex items-center justify-between pb-3 border-b border-gray-300">
-          <h3 className="text-lg font-semibold text-white text-center">Carrito de Compras</h3>
+          <h3 className="text-lg font-semibold text-teal-900 text-center">Carrito de Compras</h3>
           <button
             onClick={toggleModal}
-            className="text-white bg-transparent hover:bg-gray-200 hover:text-white rounded-lg text-sm p-2"
+            className="text-teal-900 bg-transparent hover:bg-gray-200 hover:text-teal-900 rounded-lg text-sm p-2"
           >
             <svg
               className="w-5 h-5"
@@ -45,13 +45,13 @@ const ModalCart = ({ isOpen, toggleModal }) => {
             cart.map((item, index) => (
               <div key={`${item.id}-${index}`} className="flex ml--10 mb-2 justify-around">
                 <Image src={item.img} width={70} height={70} alt={`Imagen de ${item.name}`} />
-                <div className="mt-5 text-white text-sm">
-                  <p>{item.name} - ${item.price}</p>
+                <div className="mt-5 text-teal-900 font-semibold text-sm">
+                  <p className='text-teal-900 text-teal-900'>{item.name} - ${item.price}</p>
                   <p>Cantidad: {item.quantity}</p>
                 </div>
                 <button 
                   onClick={() => removeFromCart(item.id)} 
-                  className="text-red-900 -mt-2 font-black text-2xl"
+                  className="text-teal-900 -mt-2 font-black text-2xl"
                 >
                   X
                 </button>
@@ -63,7 +63,7 @@ const ModalCart = ({ isOpen, toggleModal }) => {
               <button 
                 onClick={toggleModal} 
                 type="button" 
-                className={`w-full px-6 py-3.5 text-base rounded-lg text-sm mb-0 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ${isCartEmpty ? 'bg-gray-400 cursor-not-allowed' : 'bg-white border border-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-white'} `}
+                className={`w-full px-6 py-3.5 text-base rounded-lg text-sm mb-0 dark:bg-teal-900 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ${isCartEmpty ? 'bg-gray-400 cursor-not-allowed' : 'bg-white border border-white focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 text-white'} `}
                 disabled={isCartEmpty}
               >
                 Finalizar compra
