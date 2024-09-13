@@ -13,6 +13,7 @@ const averageSans = Average_Sans({
 
 // Importa Firebase aquí
 import { app } from '../app/config/firebase';
+import Banner from "./components/Banner";
 
 // Agrega este console.log aquí
 console.log('Firebase initialized:', app !== undefined);
@@ -26,10 +27,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es">
-      <body className={`${averageSans.className} bg-teal-900 text-black`}>
+      <body className={`${averageSans.className} bg-amber-50 text-black`}>
          <AuthProvider>
            <CartProvider>
              <Navbar />
+             <Banner />
              <main>
                {children}
              </main>

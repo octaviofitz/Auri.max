@@ -7,7 +7,7 @@ export default async function Home() {
 
     return (
         <section>
-            <h1 className="text-3xl text-pink-100 font-black ml-8 mt-7 mb-3 lg:text-5xl lg:ml-16 lg:py-5">
+            <h1 className="text-5xl text-teal-900 font-black text-center mx-8 mt-7 mb-3 lg:text-6xl lg:py-5 lg:text-center font-black lg:mb-6">
                 Todos los productos
             </h1>
             <Suspense fallback={<div>Cargando...</div>}>

@@ -30,7 +30,7 @@ export default function Navbar() {
     <nav className="bg-white border-pink-100 dark:bg-white-900 relative w-full sm:w-full">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image src="/navbar.png" alt="Flowbite Logo" width={32} height={32} className="h-8" />
+          <Image src="/navBar.svg" alt="Flowbite Logo" width={52} height={52} className="h-16 text-teal-900" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-900">AuriMax</span>
         </Link>
 
@@ -65,7 +65,7 @@ export default function Navbar() {
     <Link
       href="/"
       onClick={closeNavbar}
-      className="block py-2 px-3 text-teal-900 bg-white-700 rounded md:bg-transparent md:text-teal-900 md:p-0 dark:text-teal-900 md:dark:text-teal-900 font-black"
+      className="block py-2 px-3 text-teal-900 text-xl bg-white-700 rounded md:bg-transparent md:text-teal-900 md:p-0 dark:text-teal-900 md:dark:text-teal-900 font-black hover:text-teal-600"
       aria-current="page"
     >
       Inicio
@@ -75,7 +75,7 @@ export default function Navbar() {
     <Link
       href="/productos"
       onClick={closeNavbar}
-      className="block py-2 px-3 text-teal-900 rounded hover:bg-pink-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-teal-900 md:dark:hover:text-blue-500 dark:hover:bg-pink-100 dark:hover:text-teal-900 md:dark:hover:bg-transparent font-black" 
+      className="block py-2 px-3 text-teal-900 text-xl rounded hover:bg-teal-600 md:hover:bg-transparent md:border-0 md:hover:text-teal-600 md:p-0 dark:text-teal-900 md:dark:hover:text-teal-600 dark:hover:bg-teal-600 dark:hover:text-teal-900 md:dark:hover:bg-transparent font-black" 
     >
       Productos
     </Link>
@@ -84,7 +84,7 @@ export default function Navbar() {
     <Link
       href="/nosotros"
       onClick={closeNavbar}
-      className="block py-2 px-3 text-teal-900 rounded hover:bg-pink-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-teal-900 md:dark:hover:text-blue-500 dark:hover:bg-pink-100 dark:hover:text-teal-900 md:dark:hover:bg-transparent font-black"
+      className="block py-2 px-3 text-teal-900 text-xl rounded hover:bg-pink-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-700 md:p-0 dark:text-teal-900 md:dark:hover:text-teal-600 dark:hover:bg-teal-600 dark:hover:text-teal-900 md:dark:hover:bg-transparent font-black"
     >
       Nosotros
     </Link>
@@ -93,7 +93,7 @@ export default function Navbar() {
     <Link
       href="/contacto"
       onClick={closeNavbar}
-      className="block py-2 px-3 text-teal-900 rounded hover:bg-pink-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-teal-900 md:dark:hover:text-blue-500 dark:hover:bg-pink-100 dark:hover:text-teal-900 md:dark:hover:bg-transparent font-black"
+      className="block py-2 px-3 text-teal-900 text-xl rounded hover:bg-pink-100 md:hover:bg-transparent md:border-0 md:hover:text-pink-700 md:p-0 dark:text-teal-900 md:dark:hover:text-teal-600 dark:hover:bg-teal-600 dark:hover:text-teal-900 md:dark:hover:bg-transparent font-black"
     >
       Contacto
     </Link>
@@ -102,7 +102,7 @@ export default function Navbar() {
     <div className="relative">
       <ShoppingCartIcon
         onClick={toggleModal}
-        className="w-6 h-6 text-teal-900 dark:text-teal-900 cursor-pointer"
+        className="w-6 h-6 text-teal-900 dark:text-teal-900 cursor-pointer dark:hover:text-teal-600"
       />
       {totalItems > 0 && (
         <span className="absolute top-[-5px] right-[-5px] bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full">

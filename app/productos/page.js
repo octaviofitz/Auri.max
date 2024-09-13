@@ -23,6 +23,7 @@ function Page() {
 
     return (
         <div className='pt-[75px] min-h-screen'>
+            <h3 className='text-5xl text-teal-900 px-10 font-black -mt-4 mb-6 lg:text-center lg:text-6xl lg:mb-12'>Elegí tu tipo de auriculares</h3>
             <CategoriasList data={categories} />
         </div>
     );

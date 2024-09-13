@@ -13,7 +13,7 @@ const ModalCart = ({ isOpen, toggleModal }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="relative w-full max-w-lg p-6 mx-auto bg-pink-100 rounded-lg shadow-lg">
+      <div className="relative w-full max-w-lg p-6 mx-auto bg-amber-50 rounded-lg shadow-lg">
         <div className="flex items-center justify-between pb-3 border-b border-gray-300">
           <h3 className="text-lg font-semibold text-teal-900 text-center">Carrito de Compras</h3>
           <button
