@@ -12,14 +12,21 @@ export const CartProvider = ({ children }) => {
     const addToCart = (item) => {
         setCart((prevCart) => {
             const existingItem = prevCart.find(cartItem => cartItem.id === item.id);
+            const totalQuantity = existingItem ? existingItem.quantity + item.quantity : item.quantity;
+            
+            // Verificar si la cantidad total excede el stock
+            if (totalQuantity > item.stock) {
+                return prevCart; // No se agrega si excede el stock
+            }
+
             if (existingItem) {
                 return prevCart.map(cartItem => 
                     cartItem.id === item.id 
-                    ? { ...cartItem, quantity: cartItem.quantity + 1 } 
+                    ? { ...cartItem, quantity: totalQuantity } 
                     : cartItem
                 );
             } else {
-                return [...prevCart, { ...item, quantity: 1 }];
+                return [...prevCart, { ...item, quantity: item.quantity }];
             }
         });
     };

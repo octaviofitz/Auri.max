@@ -12,7 +12,8 @@ const ProductPage = () => {
   const { addToCart } = useCartContext();
   const [quantity, setQuantity] = useState(1);
   const [stock, setStock] = useState(0);
-  
+  const [errorMessage, setErrorMessage] = useState(''); // Nuevo estado para manejar errores de stock
+
   const min = 1;
 
   useEffect(() => {
@@ -24,12 +25,12 @@ const ProductPage = () => {
         if (productSnap.exists()) {
           const data = productSnap.data();
           setProduct({ id: productSnap.id, ...data });
-          setStock(data.stock);  // Set the stock
+          setStock(data.stock); // Setear el stock
         } else {
           console.log('No se encontró producto!');
         }
       } catch (error) {
-        console.error('Error fetch del producto:', error);
+        console.error('Error al obtener el producto:', error);
       }
     };
 
@@ -39,18 +40,25 @@ const ProductPage = () => {
   const increment = () => {
     if (quantity < stock) {
       setQuantity(quantity + 1);
+      setErrorMessage(''); // Limpiar mensaje de error si el incremento es válido
+    } else {
+      setErrorMessage(`No puedes agregar más de ${stock} productos.`);
     }
   };
 
   const decrement = () => {
     if (quantity > min) {
       setQuantity(quantity - 1);
+      setErrorMessage(''); // Limpiar mensaje de error si el decremento es válido
     }
   };
 
   const handleAddToCart = () => {
     if (quantity <= stock) {
-      addToCart({ ...product, quantity });
+      addToCart({ ...product, quantity, stock }); // Pasar también el stock disponible
+      setErrorMessage(''); // Limpiar el mensaje de error si se añade correctamente
+    } else {
+      setErrorMessage(`No puedes agregar más de ${stock} productos.`);
     }
   };
 
@@ -83,7 +91,7 @@ const ProductPage = () => {
               <span className='text-teal-900 text-black-700 font-semi-bold pt-4'>Envios gratis</span>
             </div>
           </div>
-          
+
           <div className="flex items-center mb-4">
             <form className="flex items-center">
               <button
@@ -135,6 +143,7 @@ const ProductPage = () => {
               Agregar al carrito
             </button>
           </div>
+          {errorMessage && <p className="text-red-500 mb-2">{errorMessage}</p>} {/* Mostrar mensaje de error */}
         </div>
       </div>
     </div>

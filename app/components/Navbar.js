@@ -30,7 +30,7 @@ export default function Navbar() {
     <nav className="bg-white border-pink-100 dark:bg-white-900 relative w-full sm:w-full">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <Image src="/navBar.svg" alt="Flowbite Logo" width={52} height={52} className="h-16 text-teal-900" />
+          <Image src="/navBar.svg" alt="Aurimax Logo" width={52} height={52} className="h-16 text-teal-900 -mr-2" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-teal-900">AuriMax</span>
         </Link>
 
