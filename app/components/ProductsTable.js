@@ -12,10 +12,6 @@ export default function ProductsTable() {
   const [deletingProductId, setDeletingProductId] = useState(null); // Estado para rastrear el producto que se está eliminando
   const router = useRouter();
 
-  const handleCreateProduct = () => {
-    router.push('/admin/create');
-  };
-
   useEffect(() => {
     async function fetchProducts() {
       const productsData = await getProducts();
@@ -56,34 +52,11 @@ export default function ProductsTable() {
   };
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg xl:my-10 xl:mx-10 py-5">
-      <h2 className="text-2xl text-white font-semibold ml-8 mt-4 mb-4 lg:text-5xl lg:ml-16 lg:py-5 xl:mt-0 xl:mb-6">
-        Panel de administración
-      </h2>
-
-      <button className="inline-flex items-center ml-7 mb-8 px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 xl:ml-16 xl:mb-12 text-l" 
-      onClick={handleCreateProduct}>
-        Crear producto
-        <svg
-          className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 14 10"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M1 5h12m0 0L9 1m4 4L9 9"
-          />
-        </svg>
-      </button>
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg xl:my-10 xl:mx-10">
 
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
-        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-          <tr>
+        <thead className="text-xs text-black uppercase bg-pink-100 dark:bg-red-100 dark:text-black">
+          <tr className="text-teal-900 font-black text-base">
             <th scope="col" className="px-6 py-3">Nombre producto</th>
             <th scope="col" className="px-6 py-3">ID</th>
             <th scope="col" className="px-6 py-3">Categoría</th>
@@ -91,26 +64,26 @@ export default function ProductsTable() {
             <th scope="col" className="px-6 py-3">Precio</th>
             <th scope="col" className="px-10 py-3">Imagen</th>
             <th scope="col" className="px-6 py-3">Acciones</th>
-          </tr>
+          </tr> 
         </thead>
         <tbody>
           {products.length > 0 ? (
             products.map((product) => (
               <tr
                 key={product.id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                className="bg-white text-teal-900 font-bold border-b dark:bg-pink-100 dark:border-gray-700 hover:bg-pink-50 dark:hover:bg-pink-50"
               >
                 <th
                   scope="row"
-                  className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                  className="px-6 py-4 font-medium text-black whitespace-nowrap dark:text-black text-xl"
                 >
                   {product.name}
                 </th>
-                <td className="px-6 py-4">{product.id}</td>
-                <td className="px-6 py-4">{product.category}</td>
-                <td className="px-6 py-4">{product.stock}</td>
-                <td className="px-6 py-4">${product.price}</td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-4 text-black-900">{product.id}</td>
+                <td className="px-6 py-4 text-black-900">{product.category}</td>
+                <td className="px-6 py-4 text-black-900">{product.stock}</td>
+                <td className="px-6 py-4 text-black-900">${product.price}</td>
+                <td className="px-6 py-4 text-black-900">
                   <Image
                     src={product.img}
                     alt={product.name}
@@ -121,13 +94,13 @@ export default function ProductsTable() {
                 <td className="px-6 py-4">
                   <button
                     onClick={() => handleEdit(product.id)}
-                    className="font-medium text-blue-600 dark:text-blue-500 hover:underline mr-4"
+                    className="font-black text-blue-600 dark:text-blue-500 hover:underline mr-4"
                   >
                     Editar
                   </button>
                   <button
                     onClick={() => handleDelete(product.id)}
-                    className="font-medium text-red-600 dark:text-red-500 hover:underline -ml-1 mt-3"
+                    className="font-black text-red-600 dark:text-red-500 hover:underline -ml-1 mt-3"
                     disabled={deletingProductId === product.id} // Deshabilita el botón si este producto se está eliminando
                   >
                     {deletingProductId === product.id ? "Eliminando..." : "Eliminar"}

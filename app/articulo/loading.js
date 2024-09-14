@@ -6,7 +6,7 @@ function Loading() {
             <div className="relative flex justify-center items-center w-[300px] h-[300px] mx-[20vw]">
                 <svg
                     aria-hidden="true"
-                    className="w-[200px] h-[100px] text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    className="w-[200px] h-[100px] text-gray-200 animate-spin dark:text-gray-600 fill-teal-900"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"

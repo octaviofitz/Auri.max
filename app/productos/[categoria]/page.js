@@ -40,13 +40,13 @@ const Page = () => {
     }, [categoria]);
 
     return (
-        <div>
+        <section className='my-12'>
             {Array.isArray(products) && products.length > 0 ? (
                 <ProductList data={products} />
             ) : (
                 <div></div>
             )}
-        </div>
+        </section>
     );
 }
 
