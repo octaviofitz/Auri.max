@@ -52,7 +52,7 @@ export default function ProductsTable() {
   };
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg xl:my-10 xl:mx-10">
+    <div className="relative overflow-x-auto mb-12 shadow-md sm:rounded-lg xl:my-10 xl:mx-10">
 
       <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 rounded-xl">
         <thead className="text-xs text-black uppercase bg-pink-100 dark:bg-red-100 dark:text-black">

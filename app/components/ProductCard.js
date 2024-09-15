@@ -11,7 +11,7 @@ const ProductCard = ({ id, img, name, price, description }) => {
         <Link href={`/articulo/${id}`}>
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-teal-900 dark:text-teal-900">{name}</h5>
         </Link>
-        <p className="mb-3 font-normal text-teal-900 dark:text-teal-900 overflow-hidden truncate">{description}</p>
+        <p className="mb-3 font-normal text-teal-900 dark:text-teal-900 overflow-hidden line-clamp-3">{description}</p>
         <Link href={`/articulo/${id}`}>
           <button className="inline-flex items-center px-3 py-2 font-medium text-base text-center text-white bg-teal-900 rounded-lg hover:bg-teal-900 focus:ring-4 focus:outline-none focus:ring-teal-900 dark:bg-teal-900 dark:hover:bg-teal-900 dark:focus:ring-teal-900">
             Ver más

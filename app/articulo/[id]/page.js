@@ -12,7 +12,7 @@ const ProductPage = () => {
   const { addToCart } = useCartContext();
   const [quantity, setQuantity] = useState(1);
   const [stock, setStock] = useState(0);
-  const [errorMessage, setErrorMessage] = useState(''); // Nuevo estado para manejar errores de stock
+  const [errorMessage, setErrorMessage] = useState(''); // Manejar errores de stock
 
   const min = 1;
 
@@ -55,8 +55,8 @@ const ProductPage = () => {
 
   const handleAddToCart = () => {
     if (quantity <= stock) {
-      addToCart({ ...product, quantity, stock }); // Pasar también el stock disponible
-      setErrorMessage(''); // Limpiar el mensaje de error si se añade correctamente
+      addToCart({ ...product, quantity, stock });
+      setErrorMessage(''); // Limpiar mensaje de error si se añade correctamente
     } else {
       setErrorMessage(`No puedes agregar más de ${stock} productos.`);
     }
@@ -67,22 +67,25 @@ const ProductPage = () => {
   }
 
   return (
-    <div className="container mx-auto my-8 bg-amber-50">
-      <div className="max-w-xl mx-auto bg-amber-50 rounded-lg md:w-3/4 lg:flex lg:justify-around">
-        <Image
-          src={product.img}
-          alt={product.name}
-          width={500}
-          height={300}
-          className="rounded-t-lg object-cover"
-        />
-        <div className="px-10">
-          <h2 className="text-5xl font-bold text-teal-900 font-black mb-2">{product.name}</h2>
-          <p className="text-3xl font-black py-4 text-teal-900 rounded-lg inline-block">
+    <div className="container mx-auto my-8 bg-amber-50 lg:my-20 max-w-full overflow-x-hidden">
+      <div className="mx-auto bg-amber-50 rounded-lg md:w-3/4 lg:flex lg:justify-around lg:w-full max-w-full"> {/* Ajustamos el ancho a `w-full` y max-w-full */}
+        <div className="lg:w-[40vw]"> {/* Imagen ocupa 40vw en pantallas grandes */}
+          <Image
+            src={product.img}
+            alt={product.name}
+            width={500}
+            height={300}
+            className="rounded-t-lg object-cover w-full h-auto md:w-[55vw] m-auto"
+          />
+        </div>
+        <div className="px-10 lg:w-[60vw]"> {/* Información del producto ocupa 60vw en pantallas grandes */}
+          <h2 className="text-5xl font-bold text-teal-900 font-black mb-2 xl:text-6xl xl:mb-6">{product.name}</h2>
+          <p className="text-3xl font-black py-4 text-teal-900 rounded-lg inline-block xl:text-4xl">
             ${product.price}
           </p>
-          <p className="text-sm mb-4 font-semi-bold">Stock: {stock}</p>
-          <p className="text-black-700 mb-4 font-semi-bold">{product.description}</p>
+          <p className="text-sm mb-4 font-semi-bold xl:text-base xl:mb-6">Stock: {stock}</p>
+          <p className="text-black-700 mb-4 font-semi-bold break-words w-full overflow-hidden lg:pr-20 xl:text-lg">
+            {product.description}</p>
           <div className='flex'>
             <div>
               <Image src='/envios.svg' alt='' width={40} height={40} />
@@ -113,8 +116,7 @@ const ProductPage = () => {
                 type="text"
                 id="quantity-input"
                 value={quantity}
-                aria-describedby="helper-text-explanation"
-                className="bg-teal-900 border-x-0 border-gray-300 h-12 font-medium text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 w-12 pb-6 dark:bg-teal-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pt-5"
+                className="bg-teal-900 border-x-0 border-gray-300 h-12 font-medium text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 w-12 pb-6 dark:bg-teal-900 dark:border-gray-600 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 pt-5"
                 readOnly
               />
               <button

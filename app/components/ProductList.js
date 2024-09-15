@@ -5,7 +5,7 @@ function ProductList({ data }) {
   return (
     <div className="flex flex-wrap justify-center lg:justify-between">
       {data.map((product, index) => (
-        <div key={index} className="w-full sm:w-1/2 lg:w-1/3 p-2 box-border">
+        <div key={index} className="w-full sm:w-1/2 lg:w-1/3 p-2">
           <ProductCard
             id={product.id} 
             img={product.img}

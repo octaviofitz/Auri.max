@@ -52,21 +52,22 @@ function Contacto() {
   };
 
   return (
-    <section className="flex flex-col lg:flex-row lg:justify-around lg:items-start py-12 bg-pink-100">
-      <div className="lg:w-1/2 flex justify-center lg:justify-end mb-10 lg:mb-0">
+    <section className="flex flex-col my-8 mx-3 md:my-12 md:mx-10 lg:flex-row lg:justify-around lg:items-start bg-pink-100 lg:pt-20 lg:mt-10 lg:mx-10 rounded-lg">
+      <div className="pt-10 lg:w-1/2 flex justify-center lg:justify-end mb-10 lg:mb-0 lg:pt-0">
         <Image
           src="/contacto.webp"
           width={320}
           height={320}
           alt="Contacto Aurimax"
-          className="rounded-xl md:w-1/2 lg:w-3/4 rounded-"
+          className="md:w-1/2 lg:w-[40vw] rounded-lg lg:ml-6"
         />
       </div>
-      <div className="px-[12vw] lg:w-1/2 lg:px-[1vw]">
-        <h2 className="text-3xl text-teal-900 mb-8 lg:text-left font-black">
+
+      <div className="px-[12vw] lg:w-[60vw] lg:pl-16 lg:pr-6">
+        <h2 className="text-3xl text-teal-900 mb-8 lg:text-left font-black xl:text-5xl">
           Contacto
         </h2>
-        <p className="text-teal-900 font-normal text-lg">
+        <p className="text-teal-900 font-normal text-lg lg:text-lg 2xl:text-2xl">
           En Aurimax, nos apasiona ofrecerte la mejor experiencia de sonido con
           auriculares de alta calidad. Si tienes alguna consulta sobre nuestros
           productos, envíos o necesitas asistencia personalizada, no dudes en
@@ -74,9 +75,8 @@ function Contacto() {
           responderemos a la brevedad. ¡Estamos aquí para ayudarte!
         </p>
 
-        <form className="max-w-md mx-auto lg:mx-0 py-10 xl:py-20" onSubmit={handleSubmit}>
-          <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-5 xl:mb-10 group">
+        <form className="max-w-md mx-auto lg:mx-0 py-10 xl:py-20 sm:pr-20 sm:max-w-none md:pr-50 lg:-mt-8" onSubmit={handleSubmit}>
+          <div className="relative z-0 w-full mb-5 xl:mb-10 group xl:pr-60">
               <input
                 type="text"
                 name="name"
@@ -84,19 +84,18 @@ function Contacto() {
                 onChange={handleChange}
                 required
                 id="floating_first_name"
-                className="block py-2.5 px-0 w-full text-lg text-teal-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-teal-900 focus:outline-none focus:ring-0 focus:border-teal-900 peer"
+                className="block py-2.5 px-0 w-full text-lg text-teal-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:border-gray-600 dark:focus:border-teal-900 focus:outline-none focus:ring-0 focus:border-teal-900 peer lg:"
                 placeholder=" "
               />
               <label
                 htmlFor="floating_first_name"
-                className="peer-focus:font-medium absolute text-lg text-teal-900 dark:text-teal-900 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-teal-900 peer-focus:dark:text-teal-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
+                className="peer-focus:font-medium absolute text-lg text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-teal-900 peer-focus:dark:text-teal-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 lg:text-base"
               >
                 Nombre
               </label>
             </div>
-          </div>
 
-          <div className="relative z-0 w-full mb-5 xl:mb-10 group">
+          <div className="relative z-0 w-full mb-5 xl:mb-10 group lg:-mt-2 xl:pr-60">
             <input
               type="email"
               name="email"
@@ -115,7 +114,7 @@ function Contacto() {
             </label>
           </div>
 
-          <div className="relative z-0 w-full mb-5 xl:mb-10 group">
+          <div className="relative z-0 w-full mb-5 xl:mb-10 group lg:-mt-2 xl:pr-60">
             <textarea
               name="message"
               value={values.message}
