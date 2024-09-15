@@ -52,7 +52,7 @@ const handleSales = () => {
           </button>
         </div>
 
-        <div>
+       {/*  <div>
           <button
             className="inline-flex items-center ml-5 mb-2 px-3 py-2 text-sm font-medium text-center text-white bg-teal-900 rounded-lg hover:bg-teal-900 focus:ring-4 focus:outline-none focus:ring-teal-900 dark:bg-teal-900 dark:hover:bg-teal-900 dark:focus:ring-teal-900 xl:ml-16 xl:mb-12 text-l"
             onClick={handleSales}
@@ -98,7 +98,7 @@ const handleSales = () => {
               />
             </svg>
           </button>
-        </div>
+        </div> */}
       </div>
 
       <ProductsTable />
